@@ -61,8 +61,8 @@ const App = () => {
         <p>Scroll down to see the effect!</p>
       </div>
 
-      <div className="content" ref={aboutSectionRef}>
-        <h2 id="about">About</h2>
+      <div className="content" id="about" ref={aboutSectionRef}>
+        <h2>About</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
 
