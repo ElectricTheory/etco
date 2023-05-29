@@ -1,3 +1,20 @@
+.parallax-container {
+  background-color: magenta;
+  .sticky-header {
+    position: fixed;
+    z-index: 99;
+    height: 100px;
+    width: 100%;
+    background-color: lime;
+  }
+
+}
+
+.content {
+  height: 800px;
+
+}
+
 .App {
   text-align: center;
 }
