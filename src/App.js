@@ -1,33 +1,39 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './App.scss';
 import Section from './Components/Section';
+import useOnScreen from './Hooks/useOnScreen';
+import useScrollToSection from './Hooks/useScrollToSection';
+import Header from './Components/Header';
 
 const App = () => {
+  /** 
+  const [scrollY, setScrollY] = useState(0);
+  const scrollToSection = useScrollToSection();
+ **/
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+      const handleScroll = () => {
+          setScrollY(window.scrollY);
+      };
 
-    window.addEventListener('scroll', handleScroll);
+      window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+      return () => {
+          window.removeEventListener('scroll', handleScroll);
+      };
   }, []);
 
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
-        behavior: 'smooth',
-      });
-    }
+      const section = document.getElementById(sectionId);
+      if (section) {
+          window.scrollTo({
+              top: section.offsetTop,
+              behavior: 'smooth',
+          });
+      }
   };
 
- 
   const aboutSectionRef = useRef();
   const aboutOnScreen = useOnScreen(aboutSectionRef, "-300px");
 
@@ -39,29 +45,17 @@ const App = () => {
 
   return (
     <div className="parallax-container">
-      <header className={`sticky-header ${scrollY > 0 ? 'sticky' : ''}`}>
-        <nav>
-          <ul>
-            <li onClick={() => scrollToSection('about')} style={{ fontWeight: aboutOnScreen ? "bold" : "normal",
-        }}>About</li>
-            <li onClick={() => scrollToSection('contact')} style={{ fontWeight: contactOnScreen ? "bold" : "normal",
-        }}>Contact</li>
-            <li onClick={() => scrollToSection('newSec')} style={{ fontWeight: newSectionOnScreen ? "bold" : "normal",
-        }}>New</li>
-          
-          
-          </ul>
-   
-        </nav>
-      </header>
 
+
+<Header scrollToSection={scrollToSection} scrollY={scrollY} aboutOnScreen={aboutOnScreen} contactOnScreen={contactOnScreen} newSectionOnScreen={newSectionOnScreen}  />
 
       <div className="parallax" style={{ transform: `translateY(-${scrollY * 0.5}px)` }}>
         <h1>Welcome to the Parallax Page</h1>
         <p>Scroll down to see the effect!</p>
-      </div>
 
-      <div className="content" id="about" ref={aboutSectionRef}>
+
+
+        <div className="content" id="about" ref={aboutSectionRef}>
         <h2>About</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
@@ -74,11 +68,20 @@ const App = () => {
 
       <Section title="newSec" opt={newSectionRef}/>
 
+
+
+
+
+
+      </div>
+
+
+
     </div>
   );
 };
 
-
+/** 
   function useOnScreen(ref, rootMargin = "0px") {
     // State and setter for storing whether element is visible
     const [isIntersecting, setIntersecting] = useState(false);
@@ -101,5 +104,7 @@ const App = () => {
     }, []); // Empty array ensures that effect is only run on mount and unmount
     return isIntersecting;
   }
+
+  **/
 
 export default App;
