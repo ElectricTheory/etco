@@ -13,8 +13,7 @@ const App = () => {
   const parallaxRef = useRef(null);
   const [parallax, setParallax] = useState(null);
 
-
-  //animation for img fade in
+  //animation for img fade inn
   const buildInteractionObserverThreshold = (count = 100) => {
     const threshold = []
 
@@ -26,8 +25,6 @@ const App = () => {
 
     return threshold
   }
-
-
 
   const [ref, isInView] = useInView({
     rootMargin: '-45% 0px -45% 0px',
