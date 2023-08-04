@@ -1,26 +1,38 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 
-export default function Header({scrollY, scrollToSection, contactOnScreen, newSectionOnScreen, aboutOnScreen}) {
+import logo from '../../Assets/img/logo_white.svg';
 
-    return (
-        <header className={`sticky-header ${scrollY > 0 ? 'sticky' : ''}`}>
-            <nav>
-                <ul>
-                    <li onClick={() => scrollToSection('about')} style={{
-                        fontWeight: aboutOnScreen ? "bold" : "normal",
-                    }}>About</li>
-                    <li onClick={() => scrollToSection('contact')} style={{
-                        fontWeight: contactOnScreen ? "bold" : "normal",
-                    }}>Contact</li>
-                    <li onClick={() => scrollToSection('newSec')} style={{
-                        fontWeight: newSectionOnScreen ? "bold" : "normal",
-                    }}>New</li>
+var styles = {
+    position: 'fixed',
+    top: '0',
+    background: 'rgba(0, 0, 0, .8)',
+    color: '#FCA311',
+    width: '100%',
+    zIndex: '999'
+};
 
 
-                </ul>
+const Header = ({ scrollToSection, activeSection }) => {
+  return (
+    <header className="app-header" style={styles}>
+      <nav style={{display: 'flex'}}>
+        <ul>
+          <li onClick={() => scrollToSection(0)} className={activeSection === 'home' ? 'active' : ''}>
+            Home
+          </li>
+          <li onClick={() => scrollToSection(1)} className={activeSection === 'about' ? 'active' : ''}>
+            About
+          </li>
+          <li onClick={() => scrollToSection(2)} className={activeSection === 'services' ? 'active' : ''}>
+            Services
+          </li>
+        </ul>
+        <img src={logo} style={{ width: '100px'}} />
+      </nav>
+    </header>
+  );
+};
 
-            </nav>
-        </header>
+export default Header;
 
-    )
-}
+
